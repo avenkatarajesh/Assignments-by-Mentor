@@ -1,0 +1,77 @@
+/*
+Animal class - Parent1 Abstract 
+DomesticAnimal class - parent2 extends Animal
+LabratorDog class - Child 
+*/
+
+abstract class Animal {
+	abstract void eat();
+
+	abstract void sleep();
+}
+
+abstract class DomesticAnimal extends Animal {
+	public void behaviour() {
+		System.out.println("DomesticAnimal class");
+	}
+
+	public void run() {
+		System.out.println("Runns");
+	}
+
+	abstract void sleep();
+}
+
+class LabradorDog extends DomesticAnimal {
+	@Override
+	void eat() {
+		System.out.println("omnivore");
+	}
+
+	@Override
+	public void behaviour() {
+		System.out.println("Kind");
+	}
+
+	@Override
+	public void sleep() {
+		System.out.println("sleep 12 hrs per day");
+	}
+
+	@Override
+	public void run() {
+		System.out.println("Runs 35 km/hr ");
+	}
+}
+
+public class Main {
+	public static void main(String[] arg) {
+		Animal animal = new Animal() {// creating Abstract class instance and using methods.
+			void eat() {
+				System.out.println("Animal eats");
+			}
+
+			void sleep() {
+				System.out.println("Animal sleeps");
+			}
+		};
+		animal.eat();
+		animal.sleep();
+		System.out.println();
+
+		animal = new LabradorDog(); // reinitializing child class and using methods
+		animal.eat();
+		animal.sleep();
+		System.out.println();
+
+		DomesticAnimal obj1 = new LabradorDog();
+		obj1.behaviour();
+		obj1.run();
+		System.out.println();
+    
+		LabradorDog lab = new LabradorDog(); // All methods can be accessed by Child Instance using Child Refernce
+		lab.eat();
+		lab.behaviour();
+		lab.sleep();
+
+	}
