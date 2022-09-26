@@ -1,0 +1,64 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
+public class Write$Read$Duplicate{
+	public File createFolder() throws IOException {
+		File create = new File("C:\\Users\\91740\\Desktop\\IOFile");
+		if(create.createNewFile()) 
+			System.out.println("File " + create.getName() + "is Created");
+		
+		FileWriter write = new FileWriter(create);
+		write.write("ZSGS \n Batch - sept 2022.3 \n 1. A Venkata Rajesh");
+		write.flush();
+		write.close();
+		return create;
+	}
+	public void readFolder(File create) throws IOException {
+		FileReader fR = new FileReader(create);
+		BufferedReader fRead = new BufferedReader(fR);
+		String read = fRead.readLine();
+		int lineCount = 0;
+		int wordCount = 0;
+		int	characterCount = 0;
+		
+		while(read != null) {
+			String word[] = read.split(" ");
+			wordCount += word.length;
+			characterCount += read.length();
+			lineCount++;
+			System.out.println(read);
+			read = fRead.readLine();
+		}
+		System.out.println("Total Character Present : " + characterCount);
+		System.out.println("Total Word Present :" + wordCount);
+		System.out.println("Total number of line :" + lineCount);
+		fRead.close();
+	}
+	public void duplicateFile(File create) throws IOException {
+		InputStream input = new FileInputStream(create);
+		OutputStream output = new FileOutputStream("C:\\Users\\91740\\Desktop\\IOFile_Copy");
+		int content = input.read();
+		while(content != -1) {
+			output.write(content);
+			content = input.read();
+		}
+		output.flush();
+		input.close();
+		output.close();
+	}
+	public static void main(String[] args)throws IOException
+	{
+		Write$Read$Duplicate obj = new Write$Read$Duplicate();
+		File create = obj.createFolder();
+		obj.readFolder(create);
+		obj.duplicateFile(create);
+	}
+}
